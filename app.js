@@ -32,19 +32,6 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/db', function (request, response) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    console.log('Ho fatto la connessione');
-    client.query('SELECT * FROM test_table', function(err, result) {
-      done();
-      if (err)
-      { console.error(err); response.send("Error " + err); }
-      else
-      { response.render('views/db', {results: result.rows} ); }
-    });
-  });
-});
-
 // error handlers
 
 // development error handler
