@@ -34,6 +34,7 @@ app.use(function(req, res, next) {
 
 app.get('/db', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    console.log('Ho fatto la connessione');
     client.query('SELECT * FROM test_table', function(err, result) {
       done();
       if (err)
