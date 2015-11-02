@@ -5,6 +5,7 @@ $(document).ready(function () {
 
   // validate signup form on keyup and submit
   $("#register-form").validate({
+    debug: true,
     rules: {
       completename: {
         required: true,
