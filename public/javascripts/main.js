@@ -38,12 +38,16 @@ $(document).ready(function () {
       },
       email: "Per favore, inserisci una mail valida"
     },
-    submitHandler: function(form) {
+    submitHandler: function (form) {
       console.log('Form valido!');
-      $(form).ajaxSubmit();
+      sendRegistration();
     },
     errorClass: "error",
     validClass: "success"
   });
 
 }); // end document.ready
+
+function sendRegistration() {
+
+}
