@@ -30,7 +30,7 @@ $(document).ready(function () {
         required: "Per favore, inserisci la password",
         minlength: "La password deve essere lunga almeno 8 caratteri"
       },
-      confirm_password: {
+      repeatpassword: {
         required: "Per favore, conferma la password",
         minlength: "La password deve essere lunga almeno 8 caratteri",
         equalTo: "Per favore, le password devono essere identiche"
