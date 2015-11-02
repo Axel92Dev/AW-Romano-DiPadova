@@ -36,7 +36,13 @@ $(document).ready(function () {
         equalTo: "Per favore, le password devono essere identiche"
       },
       email: "Per favore, inserisci una mail valida"
-    }
+    },
+    submitHandler: function(form) {
+      console.log('Form valido!');
+      $(form).ajaxSubmit();
+    },
+    errorClass: "error",
+    validClass: "success"
   });
 
 }); // end document.ready
