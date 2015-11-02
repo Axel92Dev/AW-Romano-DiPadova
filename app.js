@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
 var app = express();
+var pg = require('pg');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +29,19 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+
+app.get('/db', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT * FROM test_table', function(err, result) {
+      done();
+      if (err)
+      { console.error(err); response.send("Error " + err); }
+      else
+      { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
 });
 
 // error handlers
