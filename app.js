@@ -5,12 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var routes = require('./routes');
 
 var app = express();
 
-
-// view engine setup
+//setup view engine as handlebars and set path to "views"
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 

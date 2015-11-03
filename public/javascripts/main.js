@@ -1,3 +1,6 @@
+var RESTUrl = '';
+var RESTProt = '';
+
 /**
  * Created by alessandroromano on 02/11/15.
  */
@@ -49,5 +52,39 @@ $(document).ready(function () {
 }); // end document.ready
 
 function sendRegistration() {
+  //$.ajax({
+  //
+  //});
+}
+
+function doLogin() {
+
+}
+
+function getMyLists() {
+
+}
+
+function addNewList() {
+
+}
+
+function getItemsOfList(listId) {
+
+}
+
+function addNewItemToList(listId) {
+
+}
+
+function changeItemState(listId, itemId, state) {
+
+}
+
+function getAllUsers() {
+
+}
+
+function shareListWithUser(userId, permissions) {
 
 }
