@@ -1,5 +1,6 @@
-var RESTUrl = '';
-var RESTProt = '';
+var REST_PROT = window.location.href.split('/')[0];
+var REST_URL = window.location.href.split('/')[2];
+
 
 /**
  * Created by alessandroromano on 02/11/15.
@@ -8,7 +9,7 @@ $(document).ready(function () {
 
   // validate signup form on keyup and submit
   $("#register-form").validate({
-    debug: true,
+    debug: false,
     rules: {
       completename: {
         required: true,
@@ -49,6 +50,15 @@ $(document).ready(function () {
     validClass: "success"
   });
 
+  if ($('#loggedIn').length > 0) {
+    getMyLists();
+  }
+
+  $('#listContainerModal').on('show.bs.modal', function (e) {
+    console.log(e.relatedTarget);
+    $('.modal-body', this).html(render('list', {}));
+  })
+
 }); // end document.ready
 
 function sendRegistration() {
@@ -62,7 +72,7 @@ function doLogin() {
 }
 
 function getMyLists() {
-
+  //$('body').html(render('myLists', {}));
 }
 
 function addNewList() {
@@ -87,4 +97,30 @@ function getAllUsers() {
 
 function shareListWithUser(userId, permissions) {
 
+}
+
+// And this is the definition of the custom function
+function render(tmpl_name, tmpl_data) {
+  if (!render.tmpl_cache) {
+    render.tmpl_cache = {};
+  }
+
+  if (!render.tmpl_cache[tmpl_name]) {
+    var tmpl_dir = '/handlebarsTemplate';
+    var tmpl_url = tmpl_dir + '/' + tmpl_name + '.hbs';
+
+    var tmpl_string;
+    $.ajax({
+      url: tmpl_url,
+      method: 'GET',
+      async: false,
+      success: function (data) {
+        tmpl_string = data;
+      }
+    });
+
+    render.tmpl_cache[tmpl_name] = Handlebars.compile(tmpl_string);
+  }
+
+  return render.tmpl_cache[tmpl_name](tmpl_data);
 }

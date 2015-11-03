@@ -8,23 +8,29 @@ var pg = require('pg');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  var notLogged = true;
-  if (notLogged) {
+  if (req.session) {
     res.render('registration');
   } else {
-    res.render('index', {nomeCompleto: 'Alessandro Romano'});
+    res.render('homepage', {nomeCompleto: req.session.nomeCompleto});
   }
 
 });
 
 /* List of REST APIs */
 
-router.get('/login', function (req, res, next) {
-  var userMail = req.getParameter('email');
-  var passw = req.getParameter('password');
+router.post('/', function (req, res, next) {
+  var userMail = req.body.emailLogin;
+  var passw = req.body.passwordLogin;
+  console.log('User: '+ userMail + '\nPassw: ' + passw);
   /* QUERY USERS TABLE TO CHECK LOGIN*/
-  //res.set(200);
-  res.send({result: 'OK'});
+  if (true) {
+    req.session.nomeCompleto = 'Ale Romano';
+    //render with query result
+    res.render('homepage', {nomeCompleto: req.session.nomeCompleto});
+  } else {
+    res.send({result: 'KO', error: 'Username o password non validi'});
+  }
+
 
 });
 
