@@ -3,8 +3,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var pg = require('pg');
-
+var PostgresDb = require('./db.js');
+var dbClient = new PostgresDb();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -34,20 +34,13 @@ router.post('/', function (req, res, next) {
 
 });
 
-router.get('/db', function (request, response) {
-  pg.connect(process.env.DATABASE_URL, function (err, client, done) {
-    console.log('Ho fatto la connessione');
-    client.query('SELECT * FROM test_table', function (err, result) {
-      done();
-      if (err) {
-        console.error(err);
-        response.send("Error " + err);
-      }
-      else {
-        response.render('db', {results: result.rows});
-      }
-    });
+router.get('/getAllUsers', function (req, res, next) {
+  dbClient.getAllUsers(function (err, result) {
+    res.send({users: result})
   });
 });
+
+//router.post('/addItemToList')
+
 
 module.exports = router;
